@@ -1,0 +1,14 @@
+{
+  "name": "quackback",
+  "version": "1.0.0",
+  "description": "Backend for Quack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nihal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
