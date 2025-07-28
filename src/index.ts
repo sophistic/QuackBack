@@ -18,10 +18,6 @@ app.use(morgan("dev"));
 
 app.use("/api", routes);
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`App running on port ${PORT}`);
-});
-
 app.get("/", (req: Request, res: Response) => {
   res.json({ message: "App is Live" });
 });
@@ -38,4 +34,8 @@ app.get("/health", async (req: Request, res: Response) => {
     console.error("❌ Health check failed:", err);
     res.status(500).json({ message: "Server or Supabase connection failed" });
   }
+});
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`App running on port ${PORT}`);
 });
