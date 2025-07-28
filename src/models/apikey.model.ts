@@ -2,7 +2,7 @@
 export interface ApiKey {
   id: string;
   created_at: Date;
-  user_id: string;
+  user_id: number;
   openai?: string;
   anthropic?: string;
   gemini?: string;
