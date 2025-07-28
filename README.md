@@ -1,1 +1,5 @@
 # QuackBack
+
+```
+npm run dev
+```
