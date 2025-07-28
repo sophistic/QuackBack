@@ -11,8 +11,7 @@ dotenv.config();
 const app = express();
 
 //middlewares
-app.use(cors({ origin: "*" }));
-
+app.use(cors({ origin: "*" })); //Allowing all Origins for now
 app.use(express.json());
 app.use(morgan("dev"));
 
