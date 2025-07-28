@@ -23,14 +23,13 @@ app.listen(PORT, () => {
 
 app.get("/health", async (req: Request, res: Response) => {
   try {
+    res.status(200).json({ message: "Healthy" });
     const { error } = await supabase.from("users").select("id").limit(1);
 
     if (error) {
       console.error("❌ Supabase error:", error.message);
       return res.status(500).json({ message: "Database connection failed" });
     }
-
-    res.status(200).json({ message: "Healthy" });
   } catch (err) {
     console.error("❌ Health check failed:", err);
     res.status(500).json({ message: "Server or Supabase connection failed" });
