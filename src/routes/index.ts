@@ -4,5 +4,16 @@ const router = Router();
 router.use("/auth", AuthRouter);
 export default router;
 
-// /auth/login/ {email:<> , password: <>}
-// -> { message : true | false}
+// TO DO
+// API KEY ROUTES
+// one POST to post keys
+// one GET to fetch keys
+
+// TO DO
+// Generate Route
+// expect provider name and apikey and model name
+// store the prompt first
+// depending on provider call
+// nessecary func from "utils"
+// also a check to validate the apikey
+// then handle storing the responses
