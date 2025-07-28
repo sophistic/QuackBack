@@ -21,6 +21,9 @@ app.listen(PORT, () => {
   console.log(`App running on port ${PORT}`);
 });
 
+app.get("/", (req: Request, res: Response) => {
+  res.json({ message: "App is Live" });
+});
 app.get("/health", async (req: Request, res: Response) => {
   try {
     const { error } = await supabase.from("users").select("id").limit(1);
