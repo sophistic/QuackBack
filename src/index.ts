@@ -3,7 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import routes from "./routes";
-import { supabase } from "./utils/supabase.ts";
+import { supabase } from "./utils/supabase";
 const PORT = 8000;
 
 dotenv.config();
