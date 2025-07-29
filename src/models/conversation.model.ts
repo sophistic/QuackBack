@@ -5,4 +5,5 @@ export interface Conversation {
   title: string;
   user_id: string;
   updated_at: Date;
+  agent_id: number;
 }

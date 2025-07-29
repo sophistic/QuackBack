@@ -12,12 +12,10 @@ router.use("/generate", GenerateRouter);
 router.use("/conversations", ConvoRouter);
 router.use("/notes", NotesRouter);
 router.use("/update", UpdateRouter);
-
-// Make doc
-// UPDATE ROUTES for all task
-// Analyse pictures
-// Voice ka part
-// Assisst Mode
+// router.use("/agent"); // /create ->create agent  , /call -> generate from agent
 // Meta prompted Agent not MCP
+// picture analyse ka endpoint
+// Voice analyse ka endpoint
+// Assisst Mode
 // MCP Agent
 export default router;

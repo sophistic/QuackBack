@@ -14,6 +14,9 @@ export const handleGenerate = async (req: Request, res: Response) => {
     modelName,
     apiKey,
     messageHistory,
+    notes,
+    agentId,
+    agentContext,
   } = req.body;
 
   if (
@@ -22,11 +25,12 @@ export const handleGenerate = async (req: Request, res: Response) => {
     typeof newConvo !== "boolean" ||
     !provider ||
     !modelName ||
-    !apiKey
+    !apiKey ||
+    !agentId
   ) {
     return res.status(400).json({
       message:
-        "Insufficient information provided. Needed email, message,  newConvo boolean, provider , modelName and apiKey",
+        "Insufficient information provided. Needed email, message,  newConvo boolean, provider , modelName , apiKey and agentId",
     });
   }
 
@@ -44,6 +48,8 @@ export const handleGenerate = async (req: Request, res: Response) => {
       message,
       apiKey,
       messageHistory,
+      notes,
+      agentContext,
     );
     const userMessage = await saveUserPrompt(
       email,
@@ -53,6 +59,7 @@ export const handleGenerate = async (req: Request, res: Response) => {
       provider,
       modelName,
       apiKey,
+      agentId,
     );
 
     const aiMessage = await saveAiResponse({

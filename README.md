@@ -107,16 +107,10 @@ Generates an AI response from the specified provider and model. Saves user and A
   "provider": "gemini | openai | anthropic",
   "modelName": "gemini-2.0-flash",
   "apiKey": "your-provider-api-key",
-  "messageHistory": [
-    {
-      "role": "user",
-      "content": "Previous message"
-    },
-    {
-      "role": "assistant",
-      "content": "Previous AI reply"
-    }
-  ]
+  "messageHistory": "Previous conversation as string",
+  "notes": ["optional user context note 1", "note 2"],
+  "agentId": 1,
+  "agentContext": "optional string context for agent"
 }
 ```
 
@@ -166,6 +160,7 @@ Fetches all conversation titles associated with a given user's email.
     "created_at": "2025-07-28T10:00:00Z",
     "title": "Trip Planning Assistant",
     "user_id": "abc123",
+    "agent_id":1,
     "updated_at": "2025-07-28T10:30:00Z"
   },
   {
@@ -173,6 +168,7 @@ Fetches all conversation titles associated with a given user's email.
     "created_at": "2025-07-27T09:00:00Z",
     "title": "AI Coding Tutor",
     "user_id": "abc123",
+    "agent_id":3,
     "updated_at": "2025-07-27T09:15:00Z"
   }
 ]
@@ -217,7 +213,7 @@ Fetches all messages from a specific conversation ID.
 
 ---
 
-### 📃 Notes
+### 📓 Notes
 
 #### GET `/api/notes/all`
 
@@ -315,7 +311,7 @@ Checks if the server and Supabase DB connection are healthy.
 
 ---
 
-### 🚀 Root
+### 🌎 Root
 
 #### GET `/`
 

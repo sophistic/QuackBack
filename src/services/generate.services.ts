@@ -7,6 +7,8 @@ export const generateResponse = async (
   message: string,
   apiKey: string,
   messageHistory: string,
+  notes?: string[],
+  agentContext?: string,
 ): Promise<string> => {
   if (!apiKey) {
     throw new Error(`API key is required for ${provider}`);
@@ -15,7 +17,14 @@ export const generateResponse = async (
   if (!message.trim()) {
     throw new Error("Message cannot be empty");
   }
-  const fullPrompt = messageHistory
+  let fullPrompt = "";
+  fullPrompt += agentContext;
+  if (notes && notes.length > 0) {
+    const formattedNotes = `User context:\n${notes.map((note) => `- ${note}`).join("\n")}\n\n`;
+    fullPrompt += formattedNotes;
+  }
+
+  fullPrompt += messageHistory
     ? `${messageHistory}\n\nUser: ${message}`
     : message;
   const providerLower = provider.toLowerCase();
