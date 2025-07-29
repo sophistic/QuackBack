@@ -163,7 +163,7 @@ Fetches all messages from a specific conversation ID.
 
 ```json
 {
-  "convoId": 123
+  "conversationId": 123
 }
 ```
 

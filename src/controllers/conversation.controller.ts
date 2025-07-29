@@ -11,9 +11,9 @@ export const GetUserConvos = async (req: Request, res: Response) => {
 };
 
 export const GetUserMessages = async (req: Request, res: Response) => {
-  const { convoId } = req.body;
+  const { conversationId } = req.body;
   try {
-    const result = await GetMessages(convoId);
+    const result = await GetMessages(conversationId);
     return res.status(201).json(result);
   } catch (err: any) {
     return res.status(500).json({ message: err.message });

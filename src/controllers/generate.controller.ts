@@ -37,13 +37,6 @@ export const handleGenerate = async (req: Request, res: Response) => {
   }
 
   try {
-    const userMessage = await saveUserPrompt(
-      email,
-      message,
-      newConvo,
-      conversationId,
-    );
-
     const aiResponse = await generateResponse(
       provider,
       modelName,
@@ -51,7 +44,12 @@ export const handleGenerate = async (req: Request, res: Response) => {
       apiKey,
       messageHistory,
     );
-
+    const userMessage = await saveUserPrompt(
+      email,
+      message,
+      newConvo,
+      conversationId,
+    );
     const aiMessage = await saveAiResponse({
       userId: userMessage.user_id,
       message: aiResponse,

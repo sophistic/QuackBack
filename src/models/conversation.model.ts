@@ -1,6 +1,6 @@
 // conversations.model.ts
 export interface Conversation {
-  id: string;
+  id: number;
   created_at: Date;
   title: string;
   user_id: string;
