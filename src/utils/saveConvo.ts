@@ -1,11 +1,15 @@
 import { supabase } from "./supabase";
 import { getUserId } from "./getUserId";
+import { generateResponse } from "../services/generate.services";
 import type { Message } from "../models/message.model";
 export const saveUserPrompt = async (
   email: string,
   message: string,
   newConvo: boolean,
-  conversationId?: number,
+  conversationId: number,
+  provider: string,
+  modelName: string,
+  apikey: string,
 ): Promise<Message> => {
   const id = await getUserId(email);
 
@@ -39,11 +43,18 @@ export const saveUserPrompt = async (
 
     return data[0];
   } else {
-    // Create new conversation first
+    const title = await generateResponse(
+      provider,
+      modelName,
+      "Generate me a title according to this first message, only reply in one line that is the title , DO NOT REPLY anything else, here's the first message :" +
+        message,
+      apikey,
+      "",
+    );
     const { data: newConvo, error: convoError } = await supabase
       .from("conversations")
       .insert({
-        title: message,
+        title: title,
         user_id: id,
       })
       .select();

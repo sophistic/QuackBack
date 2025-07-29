@@ -49,6 +49,9 @@ export const handleGenerate = async (req: Request, res: Response) => {
       message,
       newConvo,
       conversationId,
+      provider,
+      modelName,
+      apiKey,
     );
     const aiMessage = await saveAiResponse({
       userId: userMessage.user_id,
