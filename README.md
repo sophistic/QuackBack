@@ -82,7 +82,7 @@ Generates an AI response from the specified provider and model. Saves user and A
   "email": "user@example.com",
   "message": "Your prompt to the AI",
   "newConvo": true,
-  "conversationId": "null if newConvo else number",
+  "conversationId": "optional-if-newConvo-false",
   "provider": "gemini" | "openai" | "anthropic",
   "modelName": "gemini-2.0-flash",
   "apiKey": "your-provider-api-key",
@@ -116,6 +116,78 @@ Generates an AI response from the specified provider and model. Saves user and A
   "conversationId": "string",
   "aiResponse": "Generated response"
 }
+```
+
+---
+
+### 📒 Conversations
+
+#### GET `/api/conversations/title`
+
+Fetches all conversation titles associated with a given user's email.
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com"
+}
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": "1",
+    "created_at": "2025-07-28T10:00:00Z",
+    "title": "Trip Planning Assistant",
+    "user_id": "abc123",
+    "updated_at": "2025-07-28T10:30:00Z"
+  },
+  {
+    "id": "2",
+    "created_at": "2025-07-27T09:00:00Z",
+    "title": "AI Coding Tutor",
+    "user_id": "abc123",
+    "updated_at": "2025-07-27T09:15:00Z"
+  }
+]
+```
+
+#### GET `/api/conversations/messages`
+
+Fetches all messages from a specific conversation ID.
+
+**Request Body:**
+
+```json
+{
+  "convoId": 123
+}
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": 1,
+    "created_at": "2025-07-28T10:00:00Z",
+    "user_id": 42,
+    "sender": "user",
+    "content": "Hey, can you help me plan a trip?",
+    "conversation_id": 123
+  },
+  {
+    "id": 2,
+    "created_at": "2025-07-28T10:00:05Z",
+    "user_id": 42,
+    "sender": "assistant",
+    "content": "Of course! Where would you like to go?",
+    "conversation_id": 123
+  }
+]
 ```
 
 ---
