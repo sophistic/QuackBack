@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { saveUserPrompt, saveAiResponse } from "../utils/saveConvo";
 import { generateResponse } from "../services/generate.services";
+import { newNote } from "../services/notes.services";
 import type { Message } from "../models/message.model";
 
 export const handleGenerate = async (req: Request, res: Response) => {
@@ -53,12 +54,14 @@ export const handleGenerate = async (req: Request, res: Response) => {
       modelName,
       apiKey,
     );
+
     const aiMessage = await saveAiResponse({
       userId: userMessage.user_id,
       message: aiResponse,
       conversationId: userMessage.conversation_id,
     });
 
+    newNote(email, provider, modelName, apiKey, message);
     return res.status(201).json({
       userMessage,
       aiMessage,

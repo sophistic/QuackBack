@@ -24,10 +24,12 @@ Request Body:
   "password": "string"
 }
 ```
+
 Response Body:
+
 ```json
 {
-"message":"true |  false"
+  "message": "true |  false"
 }
 ```
 
@@ -41,10 +43,12 @@ Request Body:
   "password": "string"
 }
 ```
+
 Response Body:
+
 ```json
 {
-"message":"true | false"
+  "message": "true | false"
 }
 ```
 
@@ -117,13 +121,13 @@ Generates an AI response from the specified provider and model. Saves user and A
   "userMessage": {
     "content": "Your prompt",
     "user_id": "number",
-    "sender" :"user",
+    "sender": "user",
     "conversation_id": "number"
   },
   "aiMessage": {
     "content": "Generated response",
     "user_id": "number",
-    "sender":"Assisstant",
+    "sender": "Assisstant",
     "conversation_id": "number"
   },
   "conversationId": "number",
@@ -201,6 +205,58 @@ Fetches all messages from a specific conversation ID.
     "conversation_id": 123
   }
 ]
+```
+
+---
+
+### 📃 Notes
+
+#### GET `/api/notes/all`
+
+Fetches all stored notes for a specific user.
+
+**Query:**
+`/api/notes/all?email=user@example.com`
+
+**Response:**
+
+```json
+{
+  "user_id": "number",
+  "user_context": [
+    "Note 1",
+    "Note 2",
+    "..."
+  ]
+}
+```
+
+#### POST `/api/notes/update`
+
+Updates or creates the user's notes context (replaces all notes).
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com",
+  "notes": [
+    "new note 1",
+    "new note 2"
+  ]
+}
+```
+
+**Response:**
+
+```json
+{
+  "user_id": "number",
+  "user_context": [
+    "new note 1",
+    "new note 2"
+  ]
+}
 ```
 
 ---
