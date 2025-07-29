@@ -12,11 +12,13 @@ npm run dev
 
 ## ✅ API Endpoints
 
+---
+
 ### 🔐 Auth
 
 #### POST `/api/auth/login`
 
-Request Body:
+**Request Body:**
 
 ```json
 {
@@ -25,17 +27,19 @@ Request Body:
 }
 ```
 
-Response Body:
+**Response:**
 
 ```json
 {
-  "message": "true |  false"
+  "message": "true | false"
 }
 ```
+
+---
 
 #### POST `/api/auth/signup`
 
-Request Body:
+**Request Body:**
 
 ```json
 {
@@ -44,7 +48,7 @@ Request Body:
 }
 ```
 
-Response Body:
+**Response:**
 
 ```json
 {
@@ -58,7 +62,7 @@ Response Body:
 
 #### POST `/api/key/update`
 
-Request Body:
+**Request Body:**
 
 ```json
 {
@@ -69,9 +73,11 @@ Request Body:
 }
 ```
 
+---
+
 #### GET `/api/key/retrieve?email=example@example.com`
 
-Response:
+**Response:**
 
 ```json
 {
@@ -172,6 +178,8 @@ Fetches all conversation titles associated with a given user's email.
 ]
 ```
 
+---
+
 #### GET `/api/conversations/messages`
 
 Fetches all messages from a specific conversation ID.
@@ -216,7 +224,10 @@ Fetches all messages from a specific conversation ID.
 Fetches all stored notes for a specific user.
 
 **Query:**
-`/api/notes/all?email=user@example.com`
+
+```
+/api/notes/all?email=user@example.com
+```
 
 **Response:**
 
@@ -230,6 +241,8 @@ Fetches all stored notes for a specific user.
   ]
 }
 ```
+
+---
 
 #### POST `/api/notes/update`
 
@@ -261,11 +274,44 @@ Updates or creates the user's notes context (replaces all notes).
 
 ---
 
+### Update Paths
+
+#### POST `/api/update/name`
+
+Updates a user's display name based on their email.
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com",
+  "name": "New Name"
+}
+```
+
+**Response:**
+
+```json
+{
+  "message": true
+}
+```
+
+---
+
 ### 🧪 Health Check
 
 #### GET `/health`
 
-Returns the health status and DB connection status.
+Checks if the server and Supabase DB connection are healthy.
+
+**Response:**
+
+```json
+{
+  "message": "Healthy"
+}
+```
 
 ---
 
@@ -273,7 +319,15 @@ Returns the health status and DB connection status.
 
 #### GET `/`
 
-Returns the app live status.
+Returns app live status.
+
+**Response:**
+
+```json
+{
+  "message": "App is Live"
+}
+```
 
 ---
 
