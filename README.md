@@ -38,7 +38,6 @@ Request Body:
 ```json
 {
   "email": "string",
-  "name": "string",
   "password": "string"
 }
 ```

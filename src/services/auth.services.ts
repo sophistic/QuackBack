@@ -23,7 +23,6 @@ export const loginUser = async (
 
 export const signupUser = async (
   email: string,
-  name: string,
   password: string,
 ): Promise<boolean> => {
   const { data: existingUser, error: checkError } = await supabase
@@ -52,7 +51,6 @@ export const signupUser = async (
     .insert([
       {
         email: email,
-        name: name,
         password: hashedPassword,
       },
     ])

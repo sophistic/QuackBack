@@ -16,12 +16,12 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const signup = async (req: Request, res: Response) => {
-  const { email, name, password } = req.body;
-  if (!email || !name || !password) {
+  const { email, password } = req.body;
+  if (!email || !password) {
     res.status(400).json({ message: "Required Data is Missing!" });
   }
   try {
-    const result = await signupUser(email, name, password);
+    const result = await signupUser(email, password);
     return res.status(201).json({ message: result });
   } catch (err: any) {
     return res.status(500).json({ message: err.message });

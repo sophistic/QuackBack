@@ -12,4 +12,11 @@ router.use("/conversations", ConvoRouter);
 // NOTES Router
 // ANYTIME MSG SENT REMEMBER TO SEND TO "NOTIFY FUNC" TO MAKE NOTE OF IT AND ADD TO NOTES CONTEXT PER use
 // FETCH USE NOTES IN BACKEND GENERATE AND ADD TO FULL PROMPT
+// Normal Update Routes
+// Normal Fetch Routes
+// Make doc
+// Analyse pictures
+// Voice ka part
+// Assisst Mode
+// Agents
 export default router;
