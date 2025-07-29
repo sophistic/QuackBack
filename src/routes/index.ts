@@ -12,7 +12,7 @@ router.use("/generate", GenerateRouter);
 router.use("/conversations", ConvoRouter);
 router.use("/notes", NotesRouter);
 router.use("/update", UpdateRouter);
-// router.use("/agent"); // /create ->create agent  , /call -> generate from agent
+router.use("/agent"); // /create ->create agent  , /fetch -> get agents for a user with their context
 // Meta prompted Agent not MCP
 // picture analyse ka endpoint
 // Voice analyse ka endpoint
