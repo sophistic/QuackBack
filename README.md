@@ -27,7 +27,7 @@ Request Body:
 Response Body:
 ```json
 {
-"message":true / false
+"message":"true |  false"
 }
 ```
 
@@ -45,7 +45,7 @@ Request Body:
 Response Body:
 ```json
 {
-"message":true / false
+"message":"true | false"
 }
 ```
 
@@ -95,7 +95,7 @@ Generates an AI response from the specified provider and model. Saves user and A
   "message": "Your prompt to the AI",
   "newConvo": true,
   "conversationId": "optional-if-newConvo-false",
-  "provider": "gemini" / "openai" / "anthropic",
+  "provider": "gemini | openai | anthropic",
   "modelName": "gemini-2.0-flash",
   "apiKey": "your-provider-api-key",
   "messageHistory": [
