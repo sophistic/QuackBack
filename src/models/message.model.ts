@@ -1,9 +1,9 @@
 // messages.model.ts
 export interface Message {
-  id: string;
+  id: number;
   created_at: Date;
-  user_id: string;
+  user_id: number;
   sender: string;
   content: string;
-  conversation_id: string;
+  conversation_id: number;
 }
