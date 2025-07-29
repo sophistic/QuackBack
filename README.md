@@ -117,17 +117,17 @@ Generates an AI response from the specified provider and model. Saves user and A
 {
   "userMessage": {
     "content": "Your prompt",
-    "user_id": number,
+    "user_id": "number",
     "sender" :"user",
-    "conversation_id": number
+    "conversation_id": "number"
   },
   "aiMessage": {
     "content": "Generated response",
-    "user_id": number,
+    "user_id": "number",
     "sender":"Assisstant",
-    "conversation_id": number
+    "conversation_id": "number"
   },
-  "conversationId": number,
+  "conversationId": "number",
   "aiResponse": "Generated response"
 }
 ```
