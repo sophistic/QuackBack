@@ -24,6 +24,12 @@ Request Body:
   "password": "string"
 }
 ```
+Response Body:
+```json
+{
+"message":true | false
+}
+```
 
 #### POST `/api/auth/signup`
 
@@ -34,6 +40,12 @@ Request Body:
   "email": "string",
   "name": "string",
   "password": "string"
+}
+```
+Response Body:
+```json
+{
+"message":true | false
 }
 ```
 
@@ -83,7 +95,7 @@ Generates an AI response from the specified provider and model. Saves user and A
   "message": "Your prompt to the AI",
   "newConvo": true,
   "conversationId": "optional-if-newConvo-false",
-  "provider": "gemini" || "openai" || "anthropic",
+  "provider": "gemini" |"openai" | "anthropic",
   "modelName": "gemini-2.0-flash",
   "apiKey": "your-provider-api-key",
   "messageHistory": [
@@ -105,15 +117,17 @@ Generates an AI response from the specified provider and model. Saves user and A
 {
   "userMessage": {
     "content": "Your prompt",
-    "user_id": "string",
-    "conversation_id": "string"
+    "user_id": number,
+    "sender" :"user",
+    "conversation_id": number
   },
   "aiMessage": {
     "content": "Generated response",
-    "user_id": "string",
-    "conversation_id": "string"
+    "user_id": number,
+    "sender":"Assisstant",
+    "conversation_id": number
   },
-  "conversationId": "string",
+  "conversationId": number,
   "aiResponse": "Generated response"
 }
 ```
