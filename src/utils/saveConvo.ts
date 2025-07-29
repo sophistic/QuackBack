@@ -5,7 +5,7 @@ export const saveUserPrompt = async (
   email: string,
   message: string,
   newConvo: boolean,
-  conversationId: number,
+  conversationId?: number,
 ): Promise<Message> => {
   const id = await getUserId(email);
 

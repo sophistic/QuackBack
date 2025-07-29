@@ -1,14 +1,31 @@
-import { saveUserPrompt, saveAiResponse } from "../utils/saveConvo";
 import { Request, Response } from "express";
+import { saveUserPrompt, saveAiResponse } from "../utils/saveConvo";
+import { generateResponse } from "../services/generate.services";
 import type { Message } from "../models/message.model";
 
 export const handleGenerate = async (req: Request, res: Response) => {
-  const { email, message, newConvo, conversationId } = req.body;
+  const {
+    email,
+    message,
+    newConvo,
+    conversationId,
+    provider,
+    modelName,
+    apiKey,
+    messageHistory,
+  } = req.body;
 
-  if (!email || !message || typeof newConvo !== "boolean") {
+  if (
+    !email ||
+    !message ||
+    typeof newConvo !== "boolean" ||
+    !provider ||
+    !modelName ||
+    !apiKey
+  ) {
     return res.status(400).json({
       message:
-        "Insufficient information provided. Needed email, message, and newConvo boolean",
+        "Insufficient information provided. Needed email, message,  newConvo boolean, provider , modelName and apiKey",
     });
   }
 
@@ -27,7 +44,13 @@ export const handleGenerate = async (req: Request, res: Response) => {
       conversationId,
     );
 
-    const aiResponse = "This is a placeholder AI response";
+    const aiResponse = await generateResponse(
+      provider,
+      modelName,
+      message,
+      apiKey,
+      messageHistory,
+    );
 
     const aiMessage = await saveAiResponse({
       userId: userMessage.user_id,
