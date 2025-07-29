@@ -8,4 +8,8 @@ router.use("/auth", AuthRouter);
 router.use("/key", ApiRouter);
 router.use("/generate", GenerateRouter);
 router.use("/conversations", ConvoRouter);
+// TO DO
+// NOTES Router
+// ANYTIME MSG SENT REMEMBER TO SEND TO "NOTIFY FUNC" TO MAKE NOTE OF IT AND ADD TO NOTES CONTEXT PER use
+// FETCH USE NOTES IN BACKEND GENERATE AND ADD TO FULL PROMPT
 export default router;
