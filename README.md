@@ -110,7 +110,7 @@ Generates an AI response from the specified provider and model. Saves user and A
   "messageHistory": "Previous conversation as string",
   "notes": ["optional user context note 1", "note 2"],
   "agentId": 1,
-  "agentContext": "optional string context for agent"
+  "agentContext": "string context for agent"
 }
 ```
 
@@ -270,7 +270,7 @@ Updates or creates the user's notes context (replaces all notes).
 
 ---
 
-### Update Paths
+### ⬆️ Update Paths
 
 #### POST `/api/update/name`
 
@@ -295,7 +295,90 @@ Updates a user's display name based on their email.
 
 ---
 
-### 🧪 Health Check
+### 💡 Agent Management
+
+#### POST `/api/agent/create`
+
+Creates a new AI agent for a user.
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com",
+  "agentName": "Travel Bot",
+  "agentTask": "Help plan travel itineraries",
+  "provider": "openai",
+  "modelName": "gpt-4",
+  "apiKey": "user-openai-key"
+}
+```
+
+**Response:**
+
+```json
+{
+  "id": 1,
+  "name": "Travel Bot",
+  "context": "System prompt generated...",
+  "user_id": "abc123",
+  "created_at": "2025-07-30T10:00:00Z"
+}
+```
+
+---
+
+#### GET `/api/agent/fetch`
+
+Fetches all agents created by the user.
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com"
+}
+```
+
+**Response:**
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Travel Bot",
+    "context": "System prompt generated...",
+    "user_id": "abc123",
+    "created_at": "2025-07-30T10:00:00Z"
+  }
+]
+```
+
+---
+
+#### POST `/api/agent/delete`
+
+Deletes a specific agent by its ID.
+
+**Request Body:**
+
+```json
+{
+  "agentId": 1
+}
+```
+
+**Response:**
+
+```json
+{
+  "message": true
+}
+```
+
+---
+
+### 🌐 Health Check
 
 #### GET `/health`
 
