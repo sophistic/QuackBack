@@ -34,7 +34,7 @@ export const getUserNotes = async (req: Request, res: Response) => {
     if (!result) {
       return res.status(404).json({ message: false });
     }
-    return res.status(200).json(result);
+    return res.status(200).json({mesage:true,result:result});
   } catch (err: any) {
     return res.status(500).json({ message: err.message });
   }
