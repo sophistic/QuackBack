@@ -29,10 +29,16 @@ npm run dev
 
 **Response:**
 
+- **Success:** `201 Created`
+
 ```json
-{
-  "message": "true | false"
-}
+{ "message": true }
+```
+
+- **Failure:** `400 Bad Request`
+
+```json
+{ "message": false }
 ```
 
 ---
@@ -50,10 +56,16 @@ npm run dev
 
 **Response:**
 
+- **Success:** `201 Created`
+
 ```json
-{
-  "message": "true | false"
-}
+{ "message": true }
+```
+
+- **Failure:** `400 Bad Request`
+
+```json
+{ "message": false }
 ```
 
 ---
@@ -61,6 +73,8 @@ npm run dev
 ### 🔑 API Keys
 
 #### POST `/api/key/update`
+
+Updates a user's API keys.
 
 **Request Body:**
 
@@ -73,11 +87,35 @@ npm run dev
 }
 ```
 
+**Response:**
+
+- **Success:** `201 Created`
+
+```json
+{ "message": true }
+```
+
+- **Failure:** `400 Bad Request`
+
+```json
+{ "message": false }
+```
+
+- **Error:** `500 Internal Server Error`
+
+```json
+{ "message": "error details" }
+```
+
 ---
 
 #### GET `/api/key/retrieve?email=example@example.com`
 
+Retrieves a user's stored API keys.
+
 **Response:**
+
+- **Success:** `201 Created`
 
 ```json
 {
@@ -86,6 +124,18 @@ npm run dev
   "gemini": "string",
   "anthropic": "string"
 }
+```
+
+- **Failure:** `400 Bad Request`
+
+```json
+{ "message": false }
+```
+
+- **Error:** `500 Internal Server Error`
+
+```json
+{ "message": "error details" }
 ```
 
 ---
@@ -141,7 +191,7 @@ Generates an AI response from the specified provider and model. Saves user and A
 
 #### GET `/api/conversations/title`
 
-Fetches all conversation titles associated with a given user's email.
+Fetches all conversation titles associated with a user's email.
 
 **Request Body:**
 
@@ -160,16 +210,8 @@ Fetches all conversation titles associated with a given user's email.
     "created_at": "2025-07-28T10:00:00Z",
     "title": "Trip Planning Assistant",
     "user_id": "abc123",
-    "agent_id":1,
+    "agent_id": 1,
     "updated_at": "2025-07-28T10:30:00Z"
-  },
-  {
-    "id": "2",
-    "created_at": "2025-07-27T09:00:00Z",
-    "title": "AI Coding Tutor",
-    "user_id": "abc123",
-    "agent_id":3,
-    "updated_at": "2025-07-27T09:15:00Z"
   }
 ]
 ```
@@ -199,14 +241,6 @@ Fetches all messages from a specific conversation ID.
     "sender": "user",
     "content": "Hey, can you help me plan a trip?",
     "conversation_id": 123
-  },
-  {
-    "id": 2,
-    "created_at": "2025-07-28T10:00:05Z",
-    "user_id": 42,
-    "sender": "assistant",
-    "content": "Of course! Where would you like to go?",
-    "conversation_id": 123
   }
 ]
 ```
@@ -215,15 +249,9 @@ Fetches all messages from a specific conversation ID.
 
 ### 📓 Notes
 
-#### GET `/api/notes/all`
+#### GET `/api/notes/all?email=user@example.com`
 
 Fetches all stored notes for a specific user.
-
-**Query:**
-
-```
-/api/notes/all?email=user@example.com
-```
 
 **Response:**
 
@@ -232,8 +260,7 @@ Fetches all stored notes for a specific user.
   "user_id": "number",
   "user_context": [
     "Note 1",
-    "Note 2",
-    "..."
+    "Note 2"
   ]
 }
 ```
@@ -242,7 +269,7 @@ Fetches all stored notes for a specific user.
 
 #### POST `/api/notes/update`
 
-Updates or creates the user's notes context (replaces all notes).
+Replaces all notes for the user.
 
 **Request Body:**
 
@@ -274,7 +301,7 @@ Updates or creates the user's notes context (replaces all notes).
 
 #### POST `/api/update/name`
 
-Updates a user's display name based on their email.
+Updates a user's display name.
 
 **Request Body:**
 
@@ -288,9 +315,7 @@ Updates a user's display name based on their email.
 **Response:**
 
 ```json
-{
-  "message": true
-}
+{ "message": true }
 ```
 
 ---
@@ -299,7 +324,7 @@ Updates a user's display name based on their email.
 
 #### POST `/api/agent/create`
 
-Creates a new AI agent for a user.
+Creates a new AI agent.
 
 **Request Body:**
 
@@ -330,7 +355,7 @@ Creates a new AI agent for a user.
 
 #### GET `/api/agent/fetch`
 
-Fetches all agents created by the user.
+Fetches all agents for the user.
 
 **Request Body:**
 
@@ -358,7 +383,7 @@ Fetches all agents created by the user.
 
 #### POST `/api/agent/delete`
 
-Deletes a specific agent by its ID.
+Deletes an agent by ID.
 
 **Request Body:**
 
@@ -371,9 +396,7 @@ Deletes a specific agent by its ID.
 **Response:**
 
 ```json
-{
-  "message": true
-}
+{ "message": true }
 ```
 
 ---
@@ -382,14 +405,12 @@ Deletes a specific agent by its ID.
 
 #### GET `/health`
 
-Checks if the server and Supabase DB connection are healthy.
+Checks if the server and DB are healthy.
 
 **Response:**
 
 ```json
-{
-  "message": "Healthy"
-}
+{ "message": "Healthy" }
 ```
 
 ---
@@ -403,13 +424,11 @@ Returns app live status.
 **Response:**
 
 ```json
-{
-  "message": "App is Live"
-}
+{ "message": "App is Live" }
 ```
 
 ---
 
 ### 🌐 Backend Live URL
 
-**[https://quackback-xwhd.onrender.com/](https://quackback-xwhd.onrender.com/)**
+[https://quackback-xwhd.onrender.com/](https://quackback-xwhd.onrender.com/)
