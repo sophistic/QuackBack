@@ -1,3 +1,4 @@
+
 # 🥆 QuackBack API Documentation
 
 ## Getting Started
@@ -6,7 +7,7 @@ To start the development server:
 
 ```bash
 npm run dev
-```
+````
 
 ---
 
@@ -29,16 +30,10 @@ npm run dev
 
 **Response:**
 
-- **Success:** `201 Created`
-
 ```json
-{ "message": true }
-```
-
-- **Failure:** `400 Bad Request`
-
-```json
-{ "message": false }
+{
+  "message": true | false
+}
 ```
 
 ---
@@ -56,16 +51,10 @@ npm run dev
 
 **Response:**
 
-- **Success:** `201 Created`
-
 ```json
-{ "message": true }
-```
-
-- **Failure:** `400 Bad Request`
-
-```json
-{ "message": false }
+{
+  "message": true | false
+}
 ```
 
 ---
@@ -73,8 +62,6 @@ npm run dev
 ### 🔑 API Keys
 
 #### POST `/api/key/update`
-
-Updates a user's API keys.
 
 **Request Body:**
 
@@ -89,53 +76,28 @@ Updates a user's API keys.
 
 **Response:**
 
-- **Success:** `201 Created`
-
 ```json
-{ "message": true }
-```
-
-- **Failure:** `400 Bad Request`
-
-```json
-{ "message": false }
-```
-
-- **Error:** `500 Internal Server Error`
-
-```json
-{ "message": "error details" }
+{
+  "message": true | false
+}
 ```
 
 ---
 
 #### GET `/api/key/retrieve?email=example@example.com`
 
-Retrieves a user's stored API keys.
-
 **Response:**
-
-- **Success:** `201 Created`
 
 ```json
 {
-  "user_id": "string",
-  "openai": "string",
-  "gemini": "string",
-  "anthropic": "string"
+  "message": true | false,
+  "data": {
+    "user_id": "string",
+    "openai": "string",
+    "gemini": "string",
+    "anthropic": "string"
+  }
 }
-```
-
-- **Failure:** `400 Bad Request`
-
-```json
-{ "message": false }
-```
-
-- **Error:** `500 Internal Server Error`
-
-```json
-{ "message": "error details" }
 ```
 
 ---
@@ -177,7 +139,7 @@ Generates an AI response from the specified provider and model. Saves user and A
   "aiMessage": {
     "content": "Generated response",
     "user_id": "number",
-    "sender": "Assisstant",
+    "sender": "assistant",
     "conversation_id": "number"
   },
   "conversationId": "number",
@@ -190,8 +152,6 @@ Generates an AI response from the specified provider and model. Saves user and A
 ### 📒 Conversations
 
 #### GET `/api/conversations/title`
-
-Fetches all conversation titles associated with a user's email.
 
 **Request Body:**
 
@@ -220,8 +180,6 @@ Fetches all conversation titles associated with a user's email.
 
 #### GET `/api/conversations/messages`
 
-Fetches all messages from a specific conversation ID.
-
 **Request Body:**
 
 ```json
@@ -241,6 +199,14 @@ Fetches all messages from a specific conversation ID.
     "sender": "user",
     "content": "Hey, can you help me plan a trip?",
     "conversation_id": 123
+  },
+  {
+    "id": 2,
+    "created_at": "2025-07-28T10:00:05Z",
+    "user_id": 42,
+    "sender": "assistant",
+    "content": "Of course! Where would you like to go?",
+    "conversation_id": 123
   }
 ]
 ```
@@ -251,25 +217,24 @@ Fetches all messages from a specific conversation ID.
 
 #### GET `/api/notes/all?email=user@example.com`
 
-Fetches all stored notes for a specific user.
-
 **Response:**
 
 ```json
 {
-  "user_id": "number",
-  "user_context": [
-    "Note 1",
-    "Note 2"
-  ]
+  "message": true | false,
+  "data": {
+    "user_id": "number",
+    "user_context": [
+      "Note 1",
+      "Note 2"
+    ]
+  }
 }
 ```
 
 ---
 
 #### POST `/api/notes/update`
-
-Replaces all notes for the user.
 
 **Request Body:**
 
@@ -287,11 +252,14 @@ Replaces all notes for the user.
 
 ```json
 {
-  "user_id": "number",
-  "user_context": [
-    "new note 1",
-    "new note 2"
-  ]
+  "message": true | false,
+  "data": {
+    "user_id": "number",
+    "user_context": [
+      "new note 1",
+      "new note 2"
+    ]
+  }
 }
 ```
 
@@ -300,8 +268,6 @@ Replaces all notes for the user.
 ### ⬆️ Update Paths
 
 #### POST `/api/update/name`
-
-Updates a user's display name.
 
 **Request Body:**
 
@@ -315,7 +281,9 @@ Updates a user's display name.
 **Response:**
 
 ```json
-{ "message": true }
+{
+  "message": true | false
+}
 ```
 
 ---
@@ -323,8 +291,6 @@ Updates a user's display name.
 ### 💡 Agent Management
 
 #### POST `/api/agent/create`
-
-Creates a new AI agent.
 
 **Request Body:**
 
@@ -355,8 +321,6 @@ Creates a new AI agent.
 
 #### GET `/api/agent/fetch`
 
-Fetches all agents for the user.
-
 **Request Body:**
 
 ```json
@@ -383,8 +347,6 @@ Fetches all agents for the user.
 
 #### POST `/api/agent/delete`
 
-Deletes an agent by ID.
-
 **Request Body:**
 
 ```json
@@ -396,7 +358,9 @@ Deletes an agent by ID.
 **Response:**
 
 ```json
-{ "message": true }
+{
+  "message": true | false
+}
 ```
 
 ---
@@ -405,12 +369,12 @@ Deletes an agent by ID.
 
 #### GET `/health`
 
-Checks if the server and DB are healthy.
-
 **Response:**
 
 ```json
-{ "message": "Healthy" }
+{
+  "message": "Healthy"
+}
 ```
 
 ---
@@ -424,11 +388,20 @@ Returns app live status.
 **Response:**
 
 ```json
-{ "message": "App is Live" }
+{
+  "message": "App is Live"
+}
 ```
 
 ---
 
 ### 🌐 Backend Live URL
 
-[https://quackback-xwhd.onrender.com/](https://quackback-xwhd.onrender.com/)
+**[https://quackback-xwhd.onrender.com/](https://quackback-xwhd.onrender.com/)**
+
+```
+
+---
+
+Let me know if you want this exported as a `.md` file too.
+```
