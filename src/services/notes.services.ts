@@ -69,14 +69,8 @@ export const newNote = async (
     return null;
   }
 
-  const existingNotes: Note = await getNotes(email);
-  const updatedNotes = existingNotes?.user_context || [];
 
-  if (updatedNotes.includes(note)) {
-    console.log("Note already exists.");
-    return;
-  }
 
-  const newNotesArray = [...updatedNotes, note];
+  const newNotesArray = [note];
   const updatedNoteEntry = await updateNotes(email, newNotesArray);
 };
