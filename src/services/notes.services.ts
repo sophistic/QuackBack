@@ -5,10 +5,10 @@ import { generateResponse } from "./generate.services";
 export const updateNotes = async (
   email: string,
   notes: string[],
-): Promise<Note> => {
+): Promise<boolean> => {
   const id = await getUserId(email);
 
-  const { data, error } = await supabase
+  const { error } = await supabase
     .from("notes")
     .upsert(
       {
@@ -16,28 +16,30 @@ export const updateNotes = async (
         user_context: notes,
       },
       { onConflict: "user_id" },
-    )
-    .select()
-    .single();
+    );
 
   if (error) {
-    throw new Error(error.message);
+    console.error("Update notes error:", error.message);
+    return false;
   }
 
-  return data as Note;
+  return true;
 };
 
-export const getNotes = async (email: string): Promise<Note> => {
+export const getNotes = async (email: string): Promise<Note | null> => {
   const id = await getUserId(email);
+
   const { data, error } = await supabase
     .from("notes")
     .select("*")
     .eq("user_id", id)
-    .select()
     .single();
+
   if (error) {
-    throw new Error(error.message);
+    console.error("Get notes error:", error.message);
+    return null;
   }
+
   return data as Note;
 };
 
