@@ -51,26 +51,40 @@ export const newNote = async (
   message: string,
 ): Promise<any> => {
   const id = await getUserId(email);
+
+  // Step 1: Get current user notes (might be null)
+  const currentNoteEntry = await getNotes(email);
+  const currentNotes = currentNoteEntry?.user_context ?? [];
+
+  // Step 2: Construct system prompt with current context
+  const systemPrompt =
+    "You are a note taker assistant. Below is the current context already stored for the user:\n\n" +
+    (currentNotes.length ? currentNotes.join("\n- ") : "(No existing notes)") +
+    "\n\nHere is the user's new message. If there's anything worth remembering long-term as context, reply with it in ONE SENTENCE. " +
+    "REPLY AN EMPTY STRING IF NOTHING IS WORTH REMEMBERING. DO NOT REPLY WITH ANYTHING ELSE.\n\nUser Message: " +
+    message;
+
+  // Step 3: Generate note using LLM
   const response = await generateResponse(
     provider,
     modelName,
-    "You are a note taker Assisstant , here is the users message if theres anything worth remembering for the user in the long term as chat context please reply only that in ONE SENTENCE.  REPLY AN EMPTY STRING IF NOTHING ELSE IS WORTH REMEMBERING. DO NOT REPLY WITH ANYTHING ELSE. HERE IS THE USER MESSAGE: " +
-      message,
+    systemPrompt,
     apiKey,
     "",
   );
 
-  const note = String(response)
-    .replace(/[`\\n]/g, "")
-    .trim();
+  const note = String(response).replace(/[`\\n]/g, "").trim();
 
   if (!note || note === "") {
     console.log("No relevant note to store.");
     return null;
   }
 
+  // Step 4: Append if not already present
+  const updatedNotes = currentNotes.includes(note)
+    ? currentNotes
+    : [...currentNotes, note];
 
-
-  const newNotesArray = [note];
-  const updatedNoteEntry = await updateNotes(email, newNotesArray);
+  const updateSuccess = await updateNotes(email, updatedNotes);
+  return updateSuccess ? { message: true, note } : { message: false };
 };
