@@ -6,7 +6,7 @@ export const updateApiKeys = async (
 ): Promise<boolean> => {
   const { data, error } = await supabase
     .from("api_keys")
-    .upsert({
+    .insert({
       provider: provider,
       api_key: apiKey,
     })
