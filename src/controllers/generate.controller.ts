@@ -12,7 +12,6 @@ export const handleGenerate = async (req: Request, res: Response) => {
     conversationId,
     provider,
     modelName,
-    apiKey,
     messageHistory,
     notes,
     agentId,
@@ -25,7 +24,6 @@ export const handleGenerate = async (req: Request, res: Response) => {
     typeof newConvo !== "boolean" ||
     !provider ||
     !modelName ||
-    !apiKey ||
     !agentId
   ) {
     return res.status(400).json({
@@ -46,7 +44,7 @@ export const handleGenerate = async (req: Request, res: Response) => {
       provider,
       modelName,
       message,
-      apiKey,
+
       messageHistory,
       notes,
       agentContext,
@@ -58,7 +56,7 @@ export const handleGenerate = async (req: Request, res: Response) => {
       conversationId,
       provider,
       modelName,
-      apiKey,
+
       agentId,
     );
 
@@ -68,7 +66,7 @@ export const handleGenerate = async (req: Request, res: Response) => {
       conversationId: userMessage.conversation_id,
     });
 
-    newNote(email, provider, modelName, apiKey, message);
+    newNote(email, provider, modelName, message);
     return res.status(201).json({
       userMessage,
       aiMessage,

@@ -9,7 +9,6 @@ export const createAgent = async (
   agentTask: string,
   provider: string,
   modelName: string,
-  apiKey: string,
 ): Promise<Agent> => {
   const id = await getUserId(email);
   const result = await generateResponse(
@@ -20,7 +19,7 @@ export const createAgent = async (
       "whose task is :" +
       agentTask +
       "ONLY REPLY THE SYSTEM PROMPT, NO NEED TO GIVE ANY OTHER DETAIL , JUST THE SYSTEM PROMPT FOR THE AGENT IS ENOUGH. DO NOT SAY ANY EXTRA LINE OR SENTENCE LIKE Okay, here's a system prompt for an agent named. JUST REPLY THE SYSTEM PROMPT. ",
-    apiKey,
+
     "",
   );
   const { data, error } = await supabase

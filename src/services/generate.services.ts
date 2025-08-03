@@ -1,19 +1,17 @@
 import { generateGeminiResponse } from "../utils/geminiHandler";
 import { generateOpenAIResponse } from "../utils/openaiHandler";
 import { generateClaudeResponse } from "../utils/claudeHandler";
+import { getApiKey } from "../utils/getApiKey";
 export const generateResponse = async (
   provider: string,
   modelName: string,
   message: string,
-  apiKey: string,
+
   messageHistory: string,
   notes?: string[],
   agentContext?: string,
 ): Promise<string> => {
-  if (!apiKey) {
-    throw new Error(`API key is required for ${provider}`);
-  }
-
+  const apiKey = await getApiKey(provider);
   if (!message.trim()) {
     throw new Error("Message cannot be empty");
   }

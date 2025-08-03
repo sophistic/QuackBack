@@ -8,15 +8,13 @@ export const updateNotes = async (
 ): Promise<boolean> => {
   const id = await getUserId(email);
 
-  const { error } = await supabase
-    .from("notes")
-    .upsert(
-      {
-        user_id: id,
-        user_context: notes,
-      },
-      { onConflict: "user_id" },
-    );
+  const { error } = await supabase.from("notes").upsert(
+    {
+      user_id: id,
+      user_context: notes,
+    },
+    { onConflict: "user_id" },
+  );
 
   if (error) {
     console.error("Update notes error:", error.message);
@@ -47,7 +45,7 @@ export const newNote = async (
   email: string,
   provider: string,
   modelName: string,
-  apiKey: string,
+
   message: string,
 ): Promise<any> => {
   const id = await getUserId(email);
@@ -69,11 +67,13 @@ export const newNote = async (
     provider,
     modelName,
     systemPrompt,
-    apiKey,
+
     "",
   );
 
-  const note = String(response).replace(/[`\\n]/g, "").trim();
+  const note = String(response)
+    .replace(/[`\\n]/g, "")
+    .trim();
 
   if (!note || note === "") {
     console.log("No relevant note to store.");

@@ -5,14 +5,14 @@ import {
   deleteAgent,
 } from "../services/agent.services";
 export const createUserAgent = async (req: Request, res: Response) => {
-  const { email, agentName, agentTask, provider, modelName, apiKey } = req.body;
+  const { email, agentName, agentTask, provider, modelName } = req.body;
   if (
     !email ||
     !agentName ||
     !agentTask ||
     !provider ||
     !modelName ||
-    !apiKey
+
   ) {
     return res.status(500).json({ message: "Incomplete Data." });
   }
@@ -23,7 +23,7 @@ export const createUserAgent = async (req: Request, res: Response) => {
       agentTask,
       provider,
       modelName,
-      apiKey,
+
     );
     return res.status(201).json(result);
   } catch (err: any) {

@@ -9,7 +9,7 @@ export const saveUserPrompt = async (
   conversationId: number,
   provider: string,
   modelName: string,
-  apikey: string,
+
   agentId: number,
 ): Promise<Message> => {
   const id = await getUserId(email);
@@ -49,7 +49,7 @@ export const saveUserPrompt = async (
       modelName,
       "Generate me a title according to this first message, only reply in one line that is the title , DO NOT REPLY anything else, here's the first message :" +
         message,
-      apikey,
+
       "",
     );
     const { data: newConvo, error: convoError } = await supabase
