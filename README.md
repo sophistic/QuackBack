@@ -449,3 +449,7 @@ Returns app live status.
 ### 🌐 Backend Live URL
 
 **[https://quackback-xwhd.onrender.com/](https://quackback-xwhd.onrender.com/)**
+
+### Api Management URL
+
+**[https://quack-api-manager.vercel.app/](https://quack-api-manager.vercel.app/)**
