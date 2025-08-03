@@ -1,9 +1,8 @@
 // api-keys.model.ts
 export interface ApiKey {
-  id: string;
+  id: number;
   created_at: Date;
-  user_id: number;
-  openai?: string;
-  anthropic?: string;
-  gemini?: string;
+  provider: string;
+  api_key: string;
+  active: boolean;
 }

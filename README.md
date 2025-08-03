@@ -57,48 +57,73 @@ npm run dev
 }
 ```
 
+
+````markdown
 ---
 
 ### 🔑 API Keys
 
 #### POST `/api/key/update`
 
-**Request Body:**
+Store or rotate a single provider key in your global pool.
 
-```json
-{
-  "email": "string",
-  "openai": "string",
-  "gemini": "string",
-  "anthropic": "string"
-}
-```
+- **Request Body:**
+  ```json
+  {
+    "provider": "gemini" | "claude" | "openai",
+    "apiKey": "your-new-api-key"
+  }
+````
 
-**Response:**
+* **Response:**
 
-```json
-{
-  "message": true | false
-}
-```
+  ```json
+  {
+    "message": true
+  }
+  ```
+* **Errors:**
+
+  * `400` if `provider` or `apiKey` is missing.
+  * `500` on internal failure.
 
 ---
 
-#### GET `/api/key/retrieve?email=example@example.com`
+#### GET `/api/key/retrieve`
 
-**Response:**
+Fetch all active keys for a given provider.
 
-```json
-{
-  "message": true | false,
-  "data": {
-    "user_id": "string",
-    "openai": "string",
-    "gemini": "string",
-    "anthropic": "string"
-  }
-}
-```
+* **Query Parameter:**
+
+  ```
+  ?provider=gemini
+  ```
+* **Response:**
+  Returns an array of stored `{ id, provider, api_key, created_at, rotated_at }` records.
+
+  ```json
+  [
+    {
+      "id": 1,
+      "provider": "gemini",
+      "api_key": "AlzaSyCHu3lu_s2gno2skXWVD8mJCalx",
+      "created_at": "2025-07-28T18:40:47.206Z",
+      "rotated_at": null
+    },
+    {
+      "id": 2,
+      "provider": "gemini",
+      "api_key": "another-active-key",
+      "created_at": "2025-08-01T09:12:30.451Z",
+      "rotated_at": "2025-08-10T14:22:13.000Z"
+    }
+  ]
+  ```
+* **Errors:**
+
+  * `400` if `provider` is missing.
+  * `500` on internal failure.
+
 
 ---
 
