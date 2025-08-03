@@ -88,7 +88,7 @@ Store or rotate a single provider key in your global pool.
 
 ---
 
-#### GET `/api/key/retrieve`
+#### POST `/api/key/retrieve`
 
 Fetch all active keys for a given provider.
 
