@@ -73,9 +73,10 @@ Store or rotate a single provider key in your global pool.
     "provider": "gemini" | "claude" | "openai",
     "apiKey": "your-new-api-key"
   }
-````
+  ```
 
-* **Response:**
+
+-  **Response:**
 
   ```json
   {
