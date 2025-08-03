@@ -107,14 +107,16 @@ Fetch all active keys for a given provider.
       "provider": "gemini",
       "api_key": "AlzaSyCHu3lu_s2gno2skXWVD8mJCalx",
       "created_at": "2025-07-28T18:40:47.206Z",
-      "rotated_at": null
-    },
+      "updated_at":"2025-07-28T18:40:47.206Z",
+      "active": true
+      },
     {
       "id": 2,
       "provider": "gemini",
       "api_key": "another-active-key",
       "created_at": "2025-08-01T09:12:30.451Z",
-      "rotated_at": "2025-08-10T14:22:13.000Z"
+      "updated_at":"2025-07-28T18:40:47.206Z",
+      "active": true
     }
   ]
   ```
@@ -169,7 +171,6 @@ Generates an AI response from the specified provider and model. Saves user and A
   "conversationId": "optional-if-newConvo-false",
   "provider": "gemini | openai | anthropic",
   "modelName": "gemini-2.0-flash",
-  "apiKey": "your-provider-api-key",
   "messageHistory": "Previous conversation as string",
   "notes": ["optional user context note 1", "note 2"],
   "agentId": 1,
@@ -352,7 +353,6 @@ Generates an AI response from the specified provider and model. Saves user and A
   "agentTask": "Help plan travel itineraries",
   "provider": "openai",
   "modelName": "gpt-4",
-  "apiKey": "user-openai-key"
 }
 ```
 
