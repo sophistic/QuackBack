@@ -6,14 +6,7 @@ import {
 } from "../services/agent.services";
 export const createUserAgent = async (req: Request, res: Response) => {
   const { email, agentName, agentTask, provider, modelName } = req.body;
-  if (
-    !email ||
-    !agentName ||
-    !agentTask ||
-    !provider ||
-    !modelName ||
-
-  ) {
+  if (!email || !agentName || !agentTask || !provider || !modelName) {
     return res.status(500).json({ message: "Incomplete Data." });
   }
   try {
@@ -23,7 +16,6 @@ export const createUserAgent = async (req: Request, res: Response) => {
       agentTask,
       provider,
       modelName,
-
     );
     return res.status(201).json(result);
   } catch (err: any) {
