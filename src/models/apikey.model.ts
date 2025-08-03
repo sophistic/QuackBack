@@ -5,4 +5,5 @@ export interface ApiKey {
   provider: string;
   api_key: string;
   active: boolean;
+  updated_at: Date;
 }
