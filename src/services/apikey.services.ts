@@ -37,7 +37,10 @@ export const toggleKey = async (
 ): Promise<boolean> => {
   const { data, error } = await supabase
     .from("api_keys")
-    .update({ active: val })
+    .update({
+      active: val,
+      updated_at: new Date().toISOString(),
+    })
     .eq("id", key_id)
     .select();
   if (error) {
