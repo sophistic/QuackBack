@@ -1,5 +1,4 @@
-
-# 🥆 QuackBack API Documentation
+# 🧆 QuackBack API Documentation
 
 ## Getting Started
 
@@ -7,7 +6,7 @@ To start the development server:
 
 ```bash
 npm run dev
-````
+```
 
 ---
 
@@ -57,8 +56,6 @@ npm run dev
 }
 ```
 
-
-
 ---
 
 ### 🔑 API Keys
@@ -67,7 +64,8 @@ npm run dev
 
 Store or rotate a single provider key in your global pool.
 
-- **Request Body:**
+* **Request Body:**
+
   ```json
   {
     "provider": "gemini" | "claude" | "openai",
@@ -75,14 +73,14 @@ Store or rotate a single provider key in your global pool.
   }
   ```
 
+* **Response:**
 
--  **Response:**
+```json
+{
+  "message": true
+}
+```
 
-  ```json
-  {
-    "message": true
-  }
-  ```
 * **Errors:**
 
   * `400` if `provider` or `apiKey` is missing.
@@ -125,6 +123,33 @@ Fetch all active keys for a given provider.
   * `400` if `provider` is missing.
   * `500` on internal failure.
 
+---
+
+#### POST `/api/key/toggle`
+
+Enable or disable a specific API key.
+
+* **Request Body:**
+
+  ```json
+  {
+    "key_id": 1,
+    "val": true
+  }
+  ```
+
+* **Response:**
+
+  ```json
+  {
+    "message": true | false
+  }
+  ```
+
+- **Errors:**
+
+  * `400` if the update fails.
+  * `500` on internal failure.
 
 ---
 
@@ -424,10 +449,3 @@ Returns app live status.
 ### 🌐 Backend Live URL
 
 **[https://quackback-xwhd.onrender.com/](https://quackback-xwhd.onrender.com/)**
-
-```
-
----
-
-Let me know if you want this exported as a `.md` file too.
-```

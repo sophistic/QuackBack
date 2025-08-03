@@ -1,5 +1,9 @@
 import { Request, Response } from "express";
-import { updateApiKeys, retrieveApiKeys } from "../services/apikey.services";
+import {
+  updateApiKeys,
+  retrieveApiKeys,
+  toggleKey,
+} from "../services/apikey.services";
 
 export const updateKeys = async (req: Request, res: Response) => {
   const { provider, apiKey } = req.body;
@@ -42,5 +46,15 @@ export const retrieveKeys = async (req: Request, res: Response) => {
     return res
       .status(500)
       .json({ message: err.message || "Internal Server Error" });
+  }
+};
+
+export const toggleApiKey = async (req: Request, res: Response) => {
+  const { key_id, val } = req.body;
+  try {
+    const result = await toggleKey(key_id, val);
+    return res.status(201).json({ message: result });
+  } catch (err: any) {
+    return res.status(500).json({ message: err.message });
   }
 };

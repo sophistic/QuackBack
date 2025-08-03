@@ -30,3 +30,18 @@ export const retrieveApiKeys = async (provider: string): Promise<ApiKey[]> => {
   // Return the actual data, ensuring empty strings for undefined values
   return data;
 };
+
+export const toggleKey = async (
+  key_id: number,
+  val: boolean,
+): Promise<boolean> => {
+  const { data, error } = await supabase
+    .from("api_keys")
+    .update({ active: val })
+    .eq("id", key_id)
+    .select();
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data[0].active;
+};
