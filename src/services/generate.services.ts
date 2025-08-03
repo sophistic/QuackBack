@@ -12,6 +12,9 @@ export const generateResponse = async (
   agentContext?: string,
 ): Promise<string> => {
   const apiKey = await getApiKey(provider);
+  if (!apiKey || apiKey.trim().length == 0) {
+    throw new Error("No api key exists for selected provider");
+  }
   if (!message.trim()) {
     throw new Error("Message cannot be empty");
   }
