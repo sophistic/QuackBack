@@ -338,6 +338,25 @@ Generates an AI response from the specified provider and model. Saves user and A
 }
 ```
 
+#### Get User Name
+
+#### POST `/api/update/get-name`
+
+**Request Body:**
+
+```json
+{
+  "email": "user@example.com",
+}
+```
+
+**Response:**
+
+```json
+{
+  "name": "xyzbro"
+}
+```
 ---
 
 ### 💡 Agent Management
