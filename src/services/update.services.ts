@@ -13,3 +13,15 @@ export const UpdateUserName = async (
   }
   return true;
 };
+
+export const FetchUserName = async (email: string): Promise<string> => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("name")
+    .eq("email", email)
+    .single();
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data.name as string;
+};
