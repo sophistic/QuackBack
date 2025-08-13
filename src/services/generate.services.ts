@@ -6,9 +6,9 @@ export const generateResponse = async (
   provider: string,
   modelName: string,
   message: string,
-  messageHistory: string,
-  notes?: string[],
-  agentContext?: string,
+  messageHistory = "",
+  notes = [""],
+  agentContext = "",
 ): Promise<string> => {
   const apiKey = await getApiKey(provider);
   if (!apiKey || apiKey.trim().length == 0) {

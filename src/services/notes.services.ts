@@ -59,7 +59,7 @@ export const newNote = async (
     "You are a note taker assistant. Below is the current context already stored for the user:\n\n" +
     (currentNotes.length ? currentNotes.join("\n- ") : "(No existing notes)") +
     "\n\nHere is the user's new message. If there's anything worth remembering long-term as context, reply with it in ONE SENTENCE. " +
-    "REPLY AN EMPTY STRING IF NOTHING IS WORTH REMEMBERING. DO NOT REPLY WITH ANYTHING ELSE.\n\nUser Message: " +
+    "REPLY WITH OK , JUST 'OK', IF NOTHING IS WORTH REMEMBERING.\n\nUser Message: " +
     message;
 
   // Step 3: Generate note using LLM
@@ -67,7 +67,6 @@ export const newNote = async (
     provider,
     modelName,
     systemPrompt,
-
     "",
   );
 

@@ -69,8 +69,8 @@ export const handleGenerate = async (req: Request, res: Response) => {
       conversationId: userMessage?.conversation_id,
     });
 
-    // console.log("STEP 4: Adding new note");
-    // await newNote(email, provider, modelName, message);
+    console.log("STEP 4: Adding new note");
+    await newNote(email, provider, modelName, message);
 
     console.log("STEP 5: Sending response");
     return res.status(201).json({
