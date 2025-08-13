@@ -6,7 +6,6 @@ export const generateResponse = async (
   provider: string,
   modelName: string,
   message: string,
-
   messageHistory: string,
   notes?: string[],
   agentContext?: string,
@@ -18,7 +17,7 @@ export const generateResponse = async (
   if (!message.trim()) {
     throw new Error("Message cannot be empty");
   }
-  let fullPrompt = "";
+  let fullPrompt = "Answer in Concise manner.";
   fullPrompt += agentContext;
   if (notes && notes.length > 0) {
     const formattedNotes = `User context:\n${notes.map((note) => `- ${note}`).join("\n")}\n\n`;

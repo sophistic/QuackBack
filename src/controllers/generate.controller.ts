@@ -3,7 +3,7 @@ import { saveUserPrompt, saveAiResponse } from "../utils/saveConvo";
 import { generateResponse } from "../services/generate.services";
 import { newNote } from "../services/notes.services";
 import type { Message } from "../models/message.model";
-
+import { getUserId } from "../utils/getUserId";
 export const handleGenerate = async (req: Request, res: Response) => {
   const {
     email,
@@ -18,21 +18,20 @@ export const handleGenerate = async (req: Request, res: Response) => {
     agentContext,
   } = req.body;
 
-  if (
-    !email ||
-    !message ||
-    typeof newConvo !== "boolean" ||
-    !provider ||
-    !modelName ||
-    !agentId
-  ) {
+  const missingFields: string[] = [];
+  if (!email) missingFields.push("email");
+  if (!message) missingFields.push("message");
+  if (typeof newConvo !== "boolean") missingFields.push("newConvo (boolean)");
+  if (!provider) missingFields.push("provider");
+  if (!modelName) missingFields.push("modelName");
+  if (agentId === undefined || agentId === null) missingFields.push("agentId");
+
+  if (missingFields.length > 0) {
     return res.status(400).json({
-      message:
-        "Insufficient information provided. Needed email, message,  newConvo boolean, provider , modelName , apiKey and agentId",
+      message: `Missing required fields: ${missingFields.join(", ")}`,
     });
   }
 
-  // For existing conversations, conversationId is required
   if (!newConvo && !conversationId) {
     return res.status(400).json({
       message: "conversationId is required for existing conversations",
@@ -44,19 +43,18 @@ export const handleGenerate = async (req: Request, res: Response) => {
       provider,
       modelName,
       message,
-
       messageHistory,
       notes,
       agentContext,
     );
-    const userMessage = await saveUserPrompt(
+
+    const { message: userMessage, title } = await saveUserPrompt(
       email,
       message,
       newConvo,
       conversationId,
       provider,
       modelName,
-
       agentId,
     );
 
@@ -67,11 +65,13 @@ export const handleGenerate = async (req: Request, res: Response) => {
     });
 
     newNote(email, provider, modelName, message);
+
     return res.status(201).json({
       userMessage,
       aiMessage,
       conversationId: userMessage.conversation_id,
       aiResponse: aiMessage.content,
+      title: title || null,
     });
   } catch (err: any) {
     console.error("Generate handler error:", err);

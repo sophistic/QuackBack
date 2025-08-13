@@ -31,7 +31,7 @@ export const getNotes = async (email: string): Promise<Note | null> => {
     .from("notes")
     .select("*")
     .eq("user_id", id)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error("Get notes error:", error.message);

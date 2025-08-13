@@ -11,7 +11,7 @@ export const saveUserPrompt = async (
   modelName: string,
 
   agentId: number,
-): Promise<Message> => {
+): Promise<{ message: Message; title?: string }> => {
   const id = await getUserId(email);
 
   if (!newConvo) {
@@ -82,7 +82,7 @@ export const saveUserPrompt = async (
       throw new Error(messageError.message);
     }
 
-    return messageData[0];
+    return { message: messageData[0], title };
   }
 };
 
