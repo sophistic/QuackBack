@@ -4,6 +4,6 @@ import {
   GetUserMessages,
 } from "../controllers/conversation.controller";
 const ConvoRouter = Router();
-ConvoRouter.get("/title", GetUserConvos);
-ConvoRouter.get("/messages", GetUserMessages);
+ConvoRouter.post("/title", GetUserConvos);
+ConvoRouter.post("/messages", GetUserMessages);
 export default ConvoRouter;

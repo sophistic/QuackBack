@@ -203,7 +203,7 @@ Generates an AI response from the specified provider and model. Saves user and A
 
 ### 📒 Conversations
 
-#### GET `/api/conversations/title`
+#### POST `/api/conversations/title`
 
 **Request Body:**
 
@@ -230,7 +230,7 @@ Generates an AI response from the specified provider and model. Saves user and A
 
 ---
 
-#### GET `/api/conversations/messages`
+#### POST `/api/conversations/messages`
 
 **Request Body:**
 
