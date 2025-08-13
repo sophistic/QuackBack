@@ -3,7 +3,6 @@ import { saveUserPrompt, saveAiResponse } from "../utils/saveConvo";
 import { generateResponse } from "../services/generate.services";
 import { newNote } from "../services/notes.services";
 import type { Message } from "../models/message.model";
-import { getUserId } from "../utils/getUserId";
 export const handleGenerate = async (req: Request, res: Response) => {
   const {
     email,
@@ -39,6 +38,7 @@ export const handleGenerate = async (req: Request, res: Response) => {
   }
 
   try {
+    console.log("STEP 1: Calling generateResponse");
     const aiResponse = await generateResponse(
       provider,
       modelName,
@@ -48,7 +48,8 @@ export const handleGenerate = async (req: Request, res: Response) => {
       agentContext,
     );
 
-    const { message: userMessage, title } = await saveUserPrompt(
+    console.log("STEP 2: Saving user prompt");
+    const userPromptResult = await saveUserPrompt(
       email,
       message,
       newConvo,
@@ -58,23 +59,29 @@ export const handleGenerate = async (req: Request, res: Response) => {
       agentId,
     );
 
+    console.log("userPromptResult:", userPromptResult);
+    const { message: userMessage, title } = userPromptResult;
+
+    console.log("STEP 3: Saving AI response");
     const aiMessage = await saveAiResponse({
-      userId: userMessage.user_id,
+      user_id: userMessage?.user_id, // optional chaining just in case
       message: aiResponse,
-      conversationId: userMessage.conversation_id,
+      conversationId: userMessage?.conversation_id,
     });
 
-    newNote(email, provider, modelName, message);
+    // console.log("STEP 4: Adding new note");
+    // await newNote(email, provider, modelName, message);
 
+    console.log("STEP 5: Sending response");
     return res.status(201).json({
       userMessage,
       aiMessage,
-      conversationId: userMessage.conversation_id,
+      conversationId: userMessage?.conversation_id,
       aiResponse: aiMessage.content,
       title: title || null,
     });
   } catch (err: any) {
-    console.error("Generate handler error:", err);
+    console.error("🔥 ERROR in handleGenerate at STEP:", err.stack || err);
     return res.status(500).json({ message: err.message });
   }
 };

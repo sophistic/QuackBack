@@ -42,7 +42,7 @@ export const saveUserPrompt = async (
       throw new Error(convoError.message);
     }
 
-    return data[0];
+    return { message: data[0], title: "anything" };
   } else {
     const title = await generateResponse(
       provider,
@@ -87,18 +87,18 @@ export const saveUserPrompt = async (
 };
 
 export const saveAiResponse = async ({
-  userId,
+  user_id,
   message,
   conversationId,
 }: {
-  userId: number;
+  user_id: number;
   message: string;
   conversationId: number;
 }): Promise<Message> => {
   const { data, error } = await supabase
     .from("messages")
     .insert({
-      user_id: userId,
+      user_id: user_id,
       sender: "Assisstant",
       content: message,
       conversation_id: conversationId,
