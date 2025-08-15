@@ -17,7 +17,7 @@ export const generateResponse = async (
   if (!message.trim()) {
     throw new Error("Message cannot be empty");
   }
-  let fullPrompt = "Answer in Concise manner.";
+  let fullPrompt = "";
   fullPrompt += agentContext;
   if (notes && notes.length > 0) {
     const formattedNotes = `User context:\n${notes.map((note) => `- ${note}`).join("\n")}\n\n`;
