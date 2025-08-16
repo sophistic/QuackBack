@@ -70,9 +70,7 @@ export const newNote = async (
     "",
   );
 
-  const note = String(response)
-    .replace(/[`\\n]/g, "")
-    .trim();
+  const note = String(response).replace(/[`\\]/g, "").trim();
 
   if (
     !note ||
