@@ -10,7 +10,7 @@ export const generateResponse = async (
   notes = [""],
   agentContext = "",
 ): Promise<string> => {
-  const apiKey = await getApiKey("gemini"); //Change hardcoded later
+  const apiKey = await getApiKey(provider.toLowerCase());
   if (!apiKey || apiKey.trim().length == 0) {
     throw new Error("No api key exists for selected provider");
   }
