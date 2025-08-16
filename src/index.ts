@@ -4,6 +4,7 @@ import morgan from "morgan";
 import dotenv from "dotenv";
 import router from "./routes/index";
 import { supabase } from "./utils/supabase";
+import { getApiKey } from "./utils/getApiKey";
 const PORT = 8000;
 
 dotenv.config();
@@ -21,6 +22,11 @@ app.use("/api", router);
 
 app.get("/", (req: Request, res: Response) => {
   res.json({ message: "App is Live" });
+});
+
+app.get("/test", async (req: Request, res: Response) => {
+  const result = await getApiKey("gemini");
+  return res.status(201).json({ message: result });
 });
 app.get("/health", async (req: Request, res: Response) => {
   try {
