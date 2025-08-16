@@ -74,7 +74,13 @@ export const newNote = async (
     .replace(/[`\\n]/g, "")
     .trim();
 
-  if (!note || note === "" || note.toLowerCase() == "ok") {
+  if (
+    !note ||
+    note === "" ||
+    note.toLowerCase() == "ok" ||
+    note.includes("ok") ||
+    note.includes("OK")
+  ) {
     console.log("No relevant note to store.");
     return null;
   }
