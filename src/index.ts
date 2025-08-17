@@ -13,8 +13,7 @@ const app = express();
 
 //middlewares
 app.use(cors({ origin: "*" })); //Allowing all Origins for now
-// app.options("*", cors({ origin: "*" })); // Allow preflight across all routes
-// app.options("*", cors()); // Handle preflight
+
 app.use(express.json());
 app.use(morgan("dev"));
 
