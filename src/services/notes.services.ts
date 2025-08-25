@@ -58,8 +58,8 @@ export const newNote = async (
   const systemPrompt =
     "You are a note taker assistant. Below is the current context already stored for the user:\n\n" +
     (currentNotes.length ? currentNotes.join("\n- ") : "(No existing notes)") +
-    "\n\nHere is the user's new message. If there's anything worth remembering long-term as context, reply with it in ONE SENTENCE. " +
-    "REPLY WITH OK , JUST 'OK', IF NOTHING IS WORTH REMEMBERING.\n\nUser Message: " +
+    "\n\nHere is the user's new message. If there's anything worth remembering long-term as context, reply with it in ONE SENTENCE. Reply it in the format 'User loves ' or 'User is interested in', never response in formats like 'You like'  or 'You are interested in', always mention that its the user that the note is about   " +
+    "REPLY WITH OK , JUST 'OK', IF NOTHING IS WORTH REMEMBERING. \n\nUser Message: " +
     message;
 
   // Step 3: Generate note using LLM
