@@ -173,8 +173,6 @@ Generates an AI response from the specified provider and model. Saves user and A
   "modelName": "gemini-2.0-flash",
   "messageHistory": "Previous conversation as string",
   "notes": ["optional user context note 1", "note 2"],
-  "agentId": 1,
-  "agentContext": "string context for agent"
 }
 ```
 
@@ -182,19 +180,9 @@ Generates an AI response from the specified provider and model. Saves user and A
 
 ```json
 {
-  "userMessage": {
-    "content": "Your prompt",
-    "user_id": "number",
-    "sender": "user",
-    "conversation_id": "number"
-  },
-  "aiMessage": {
-    "content": "Generated response",
-    "user_id": "number",
-    "sender": "assistant",
-    "conversation_id": "number"
-  },
+
   "conversationId": "number",
+  "title":"abc",
   "aiResponse": "Generated response"
 }
 ```
@@ -222,7 +210,6 @@ Generates an AI response from the specified provider and model. Saves user and A
     "created_at": "2025-07-28T10:00:00Z",
     "title": "Trip Planning Assistant",
     "user_id": "abc123",
-    "agent_id": 1,
     "updated_at": "2025-07-28T10:30:00Z"
   }
 ]
