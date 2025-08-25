@@ -9,8 +9,6 @@ export const saveUserPrompt = async (
   conversationId: number,
   provider: string,
   modelName: string,
-
-  agentId: number,
 ): Promise<{ message: Message; title?: string }> => {
   const id = await getUserId(email);
 
@@ -57,7 +55,6 @@ export const saveUserPrompt = async (
       .insert({
         title: title,
         user_id: id,
-        agent_id: agentId,
       })
       .select();
 

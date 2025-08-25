@@ -8,7 +8,6 @@ export const generateResponse = async (
   message: string,
   messageHistory = "",
   notes = [""],
-  agentContext = "",
 ): Promise<string> => {
   const apiKey = await getApiKey(provider.toLowerCase());
   if (!apiKey || apiKey.trim().length == 0) {
@@ -18,7 +17,7 @@ export const generateResponse = async (
     throw new Error("Message cannot be empty");
   }
   let fullPrompt = "";
-  fullPrompt += agentContext;
+
   if (notes && notes.length > 0) {
     const formattedNotes = `User context:\n${notes.map((note) => `- ${note}`).join("\n")}\n\n`;
     fullPrompt += formattedNotes;

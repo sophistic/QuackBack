@@ -13,8 +13,6 @@ export const handleGenerate = async (req: Request, res: Response) => {
     modelName,
     messageHistory,
     notes,
-    agentId,
-    agentContext,
   } = req.body;
 
   const missingFields: string[] = [];
@@ -23,7 +21,6 @@ export const handleGenerate = async (req: Request, res: Response) => {
   if (typeof newConvo !== "boolean") missingFields.push("newConvo (boolean)");
   if (!provider) missingFields.push("provider");
   if (!modelName) missingFields.push("modelName");
-  if (agentId === undefined || agentId === null) missingFields.push("agentId");
 
   if (missingFields.length > 0) {
     return res.status(400).json({
@@ -45,7 +42,6 @@ export const handleGenerate = async (req: Request, res: Response) => {
       message,
       messageHistory,
       notes,
-      agentContext,
     );
 
     console.log("STEP 2: Saving user prompt");
@@ -56,7 +52,6 @@ export const handleGenerate = async (req: Request, res: Response) => {
       conversationId,
       provider,
       modelName,
-      agentId,
     );
 
     console.log("userPromptResult:", userPromptResult);
