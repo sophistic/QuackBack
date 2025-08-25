@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { getApiKey } from "../utils/getApiKey";
 import AuthRouter from "./auth.routes";
 import ApiRouter from "./apikey.routes";
 import GenerateRouter from "./generate.routes";
@@ -15,12 +14,10 @@ router.use("/conversations", ConvoRouter);
 router.use("/notes", NotesRouter);
 router.use("/update", UpdateRouter);
 router.use("/agent", AgentRouter);
-router.get("/testRoute", async (req, res) => {
-  const result = await getApiKey("gemini");
-  return res.status(201).json({ message: result });
-});
-// picture analyse ka endpoint
-// Voice analyse ka endpoint
-// Assisst Mode
-// MCP Agent
+
+// Add caching in Notes
+// Add caching in UserId fetch
+// Add caching in fetching convoTitles
+// Add caching in fetching getName
+
 export default router;

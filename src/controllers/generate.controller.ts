@@ -74,8 +74,6 @@ export const handleGenerate = async (req: Request, res: Response) => {
 
     console.log("STEP 5: Sending response");
     return res.status(201).json({
-      userMessage,
-      aiMessage,
       conversationId: userMessage?.conversation_id,
       aiResponse: aiMessage.content,
       title: title || null,
